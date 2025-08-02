@@ -7,10 +7,12 @@ export const TableContainer = styled.div`
   gap: 10px;
 `;
 
-export const TableItem = styled.div`
+export const TableItem = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['background', 'color'].includes(prop)  // Evita que o styled-components faça o spread de propriedades que não são suportadas 
+})`
   width: 100px;
   height: 100px;
-  color: ${(props) => props.color || 'black'};
+  color: ${(props) => props.color};
   font-weight: bold;
   font-size: 96px;
   background-color:  ${(props) => props.background};
