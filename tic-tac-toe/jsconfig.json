@@ -4,7 +4,8 @@
       "@/*": ["./src/*"],
       "@constants/*": ["./src/constants/*"],
       "@components/*": ["./src/components/*"],  
-      "@hooks/*": ["./src/hooks/*"]
+      "@hooks/*": ["./src/hooks/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   }
 }

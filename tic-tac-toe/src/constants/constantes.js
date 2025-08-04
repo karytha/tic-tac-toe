@@ -16,3 +16,4 @@ export const SAVE_GAME_LABEL = 'Salvar jogo';
 export const LOAD_GAME_LABEL = 'Carregar jogo';
 export const EXIT_LABEL = 'Sair';
 export const BACKGROUND_PLAY_LABEL = 'Cor do fundo do jogo';
+export const TURN_PLAYER_LABEL = 'Vez do jogador';

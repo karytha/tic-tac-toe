@@ -1,4 +1,5 @@
 import React from 'react';
+import { TimerContainer } from './timer-style';
 
 function Timer({ timeLeft }) {
   const formatTime = (secs) => {
@@ -8,9 +9,9 @@ function Timer({ timeLeft }) {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '2rem' }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{formatTime(timeLeft)}</h1>
-    </div>
+    <TimerContainer >
+      <h1>{formatTime(timeLeft)}</h1>
+    </TimerContainer>
   );
 }
 

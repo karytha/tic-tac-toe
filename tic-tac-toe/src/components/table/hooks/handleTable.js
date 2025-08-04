@@ -1,14 +1,19 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import useTurnPlayerTimer from "./useTurnPlayerTime";
+import { TURN_PLAYER_LABEL, DRAW_LABEL } from "@/constants/constantes";
+import { usePoints } from "@/context/points-context";
 
 const INITIAL_STATE = Array(9).fill(null)
 
 
 const handleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
+    const [message, setMessage] = useState(TURN_PLAYER_LABEL);
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const { handlePoints } = usePoints();
+
     const hasPlayedRef = useRef(false);
 
     const switchPlayer = () => {
@@ -21,6 +26,7 @@ const handleTable = () => {
         const newTable = [...table];
         newTable[index] = currentPlayer;
         setTable(newTable);
+        setMessage(`${TURN_PLAYER_LABEL} ${currentPlayer}`);
         hasPlayedRef.current = true;
         switchPlayer();
         reset();
@@ -36,12 +42,13 @@ const handleTable = () => {
         handleCellClick(randomIndex);
     };
 
-    const { timeLeft, reset } = useTurnPlayerTimer(5, () => {
-        if (!hasPlayedRef.current) {
+    const { timeLeft, reset, stopTimer } = useTurnPlayerTimer(5, () => {
+        if (!hasPlayedRef.current && !isGameOver) {
             makeRandomMove();
         }
-        switchPlayer();
-        reset();
+        if (!isGameOver) {
+            switchPlayer();
+        }
     });
 
     const handleNewGame = () => {
@@ -49,6 +56,8 @@ const handleTable = () => {
         setCurrentPlayer('X');
         setWinner(null);
         setIsGameOver(false);
+        setMessage(TURN_PLAYER_LABEL);
+        reset();
     }
 
     const winningCombinations = [
@@ -61,6 +70,7 @@ const handleTable = () => {
         [0, 4, 8],
         [2, 4, 6],
     ];
+
     const winCombination = winningCombinations.filter(combination => {
         const [itemCellA, itemCellB, itemCellC] = combination;
         return (
@@ -70,17 +80,38 @@ const handleTable = () => {
         );
     })
 
+    const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
+
     useEffect(() => {
-        if (winCombination.length > 0) {
-            setWinner(table[winCombination?.[0]?.[0]]);
+        if (winCombination.length > 0 && !isGameOver) {
+            const winningPlayer = table[winCombination[0][0]];
+            setWinner(winningPlayer);
+            handlePoints(winningPlayer);
             setIsGameOver(true);
-            reset();
+            setMessage(`Vencedor: ${winningPlayer}`);
+            stopTimer();
+        } else if (isDraw && !isGameOver) {
+            setIsGameOver(true);
+            setMessage(DRAW_LABEL);
+            stopTimer();
         }
-    }, [winCombination]);
+    }, [table, isGameOver, isDraw, stopTimer]);
 
     const handlerColorCell = (index, tableColor, winColor) => winCombination[0]?.includes(index) ? winColor : tableColor
 
-    return { table, currentPlayer, winner, isGameOver, winCombination, handleNewGame, handlerColorCell, winner: table[winCombination?.[0]?.[0]], timeLeft, handleCellClick, switchPlayer };
+    return {
+        table,
+        message,
+        currentPlayer,
+        winner,
+        isGameOver,
+        winCombination,
+        handleNewGame,
+        handlerColorCell,
+        timeLeft,
+        handleCellClick,
+        switchPlayer,
+    };
 }
 
 export default handleTable;

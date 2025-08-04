@@ -1,7 +1,13 @@
-const Score = () => {
+const Score = ({ points }) => {
+
+    console.log(points, 'score');
     return (
         <div>
-            <h1>Score</h1>
+            <div>
+                <h1>Pontuação</h1>
+                <p>X: {points?.X || 0}</p>
+                <p>O: {points?.O || 0}</p>
+            </div>
         </div>
     )
 }
