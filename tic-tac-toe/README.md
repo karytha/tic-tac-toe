@@ -47,7 +47,44 @@ Tempo e jogadas:
 
 * Estrutura de pastas
 
-<img width="483" height="288" alt="image" src="https://github.com/user-attachments/assets/2053037f-ed13-454e-8804-e70d35bbe5d0" />
+tic-tac-toe/
+├── 📁 src/
+│   ├── 📁 app/                    # Next.js App Router
+│   │   ├── layout.js              # Layout principal
+│   │   ├── page.jsx               # Página inicial
+│   │   ├── globals.css            # Estilos globais
+│   │   └── page.module.css        # CSS modules
+│   │
+│   ├── 📁 components/             # Componentes React
+│   │   ├── �� game/              # Componente principal do jogo
+│   │   ├── �� table/             # Tabuleiro do jogo
+│   │   │   ├── �� hooks/         # Hooks customizados
+│   │   │   │   ├── useHandleGame.js
+│   │   │   │   └── useTurnPlayerTime.js
+│   │   │   ├── table.jsx
+│   │   │   └── table-styles.jsx
+│   │   ├── �� player/            # Componente do jogador
+│   │   ├── �� timer/             # Componente do timer
+│   │   ├── �� score/             # Componente da pontuação
+│   │   ├── �� menu/              # Menu de configurações
+│   │   ├── �� color-selector/    # Seletor de cores
+│   │   └── �� table-item/        # Item individual do tabuleiro
+│   │
+│   ├── 📁 context/               # Context API (Gerenciamento de Estado)
+│   │   ├── color-context.jsx     # Contexto de cores
+│   │   ├── points-context.jsx    # Contexto de pontuação
+│   │   ├── message-context.jsx   # Contexto de mensagens
+│   │   └── timer-context.jsx     # Contexto do timer
+│   │
+│   ├── 📁 constants/             # Constantes do projeto
+│   │   └── constantes.js         # Labels e constantes
+│   │
+│   └── 📁 assets/                # Recursos estáticos
+│
+├── 📁 public/                    # Arquivos públicos
+├── package.json                  # Dependências
+├── next.config.mjs              # Configuração Next.js
+└── jsconfig.json                # Configuração JavaScript
 
 
 *Instruções de uso
