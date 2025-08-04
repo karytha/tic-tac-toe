@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { TableContainer, TableItem } from './table-styles'
-import Player from "@/components/player/player";
 import { useColor } from '@/context/color-context';
 
 const Table = ({ gameState }) => {

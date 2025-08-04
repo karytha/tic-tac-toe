@@ -53,7 +53,7 @@ const useHandleTable = () => {
             newTable[index] = currentPlayer;
             setTable(newTable);
             hasPlayedRef.current = true;
-            switchPlayer(); // ✅ Reset timer após jogada manual
+            switchPlayer();
         }
     }
 
@@ -63,7 +63,7 @@ const useHandleTable = () => {
         setWinner(null);
         setIsGameOver(false);
         setMessage(TURN_PLAYER_LABEL);
-        reset(); // ✅ Reset timer no início do jogo
+        reset();
     }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
@@ -100,21 +100,16 @@ const useHandleTable = () => {
     const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
 
     useEffect(() => {
-        if (points?.X >= WIN_POINTS && !isGameOver) {
-            setWinner('X');
+        if (!points || isGameOver) return;
+
+        const winnerKey = points.X >= WIN_POINTS ? 'X' : points.O >= WIN_POINTS ? 'O' : null;
+
+        if (winnerKey) {
+            setWinner(winnerKey);
             setIsGameOver(true);
-            setMessage('Jogador X venceu o campeonato!');
+            setMessage(`Jogador ${winnerKey} venceu o campeonato!`);
             stopTimer();
-            setTimeout(() => {
-                stopTimer();
-                setPoints({ X: 0, O: 0 });
-                setTable(INITIAL_STATE);
-            }, 3000);
-        } else if (points?.O >= WIN_POINTS && !isGameOver) {
-            setWinner('O');
-            setIsGameOver(true);
-            setMessage('Jogador O venceu o campeonato!');
-            stopTimer();
+
             setTimeout(() => {
                 setPoints({ X: 0, O: 0 });
                 setTable(INITIAL_STATE);
@@ -130,19 +125,20 @@ const useHandleTable = () => {
 
     useEffect(() => {
         if (winCombination.length > 0 && !isGameOver) {
+
             const winningPlayer = table[winCombination[0]?.[0]];
             setWinner(winningPlayer);
             handlePoints(winningPlayer);
             setIsGameOver(true);
-            setMessage(`Vencedor: ${winningPlayer}`);
-            stopTimer(); // ✅ Parar timer quando há vitória
+            setMessage(points[winningPlayer] + 1 === WIN_POINTS ? `Jogador ${winningPlayer} venceu o campeonato!` : `Vencedor: ${winningPlayer}`);
+            stopTimer();
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);
         } else if (isDraw && !isGameOver) {
             setIsGameOver(true);
             setMessage(DRAW_LABEL);
-            stopTimer(); // ✅ Parar timer quando há empate
+            stopTimer();
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);

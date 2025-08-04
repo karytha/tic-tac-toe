@@ -2,7 +2,7 @@
 import Table from "@/components/table/table";
 import Menu from "@/components/menu/menu";
 import Timer from "@/components/timer/timer";
-import useHandleGame from "../table/hooks/";
+import useHandleGame from "../table/hooks/useHandleGame";
 import Player from "../player/player";
 import { useColor } from "@/context/color-context";
 import Score from "../score/score";
