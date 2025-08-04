@@ -103,7 +103,7 @@ const handleTable = () => {
 
     useEffect(() => {
         const winningPlayer = table[winCombination[0]?.[0]];
-        if (isGameOver) {
+        if (isGameOver && !winCombination.length > 0) {
             startNewGameWithDelay();
             setMessage(`Vencedor: ${winningPlayer}`);
 
