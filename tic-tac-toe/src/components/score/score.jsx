@@ -1,14 +1,32 @@
-const Score = ({ points }) => {
+import { ScoreCard, ScoreTitle, ScoreValue } from "./score-styles";
+import { useColor } from "@/context/color-context";
 
-    console.log(points, 'score');
+const Score = ({ points }) => {
+    const { fontColorX, fontColorO } = useColor();
     return (
-        <div>
-            <div>
-                <h1>Pontuação</h1>
-                <p>X: {points?.X || 0}</p>
-                <p>O: {points?.O || 0}</p>
+        <ScoreCard>
+            <ScoreTitle>Pontuação</ScoreTitle>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{
+                        width: '20px',
+                        height: '20px',
+                        backgroundColor: fontColorX,
+                        borderRadius: '50%'
+                    }}></div>
+                    <span>Jogador X: {points?.X || 0}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{
+                        width: '20px',
+                        height: '20px',
+                        backgroundColor: fontColorO,
+                        borderRadius: '50%'
+                    }}></div>
+                    <span>Jogador O: {points?.O || 0}</span>
+                </div>
             </div>
-        </div>
+        </ScoreCard>
     )
 }
 

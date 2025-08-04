@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const TimerContainer = styled.div`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background-color: #44C017;
-  justify-content: center;
   color: #fff;
   padding: 5px;
   border-radius: 10px;

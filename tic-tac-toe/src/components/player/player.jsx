@@ -2,7 +2,6 @@ import React from 'react'
 import { PlayerContainer, PlayerName } from './player-styles'
 
 const Player = ({ player, currentColor }) => {
-    console.log(currentColor);
     return (
         <PlayerContainer>
             <svg

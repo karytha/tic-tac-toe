@@ -23,8 +23,6 @@ const Menu = () => {
                 <ul>
                     <ColorSelectorT key={BACKGROUND_TABLE_COLOR_LABEL} label={BACKGROUND_TABLE_COLOR_LABEL} value={backgroundTableColor} onChange={setBackgroundTableColor} />
                     <ColorSelectorT key={WINNER_COLOR_LABEL} label={WINNER_COLOR_LABEL} value={winnerColor} onChange={setWinnerColor} />
-                    <ColorSelectorT key={LOSER_COLOR_LABEL} label={LOSER_COLOR_LABEL} value={loserColor} onChange={setLoserColor} />
-                    <ColorSelectorT key={FONT_COLOR_LABEL} label={FONT_COLOR_LABEL} value={fontColor} onChange={setFontColor} />
                     <ColorSelectorT key={FONT_COLOR_X_LABEL} label={FONT_COLOR_X_LABEL} value={fontColorX} onChange={setFontColorX} />
                     <ColorSelectorT key={FONT_COLOR_O_LABEL} label={FONT_COLOR_O_LABEL} value={fontColorO} onChange={setFontColorO} />
                 </ul>
