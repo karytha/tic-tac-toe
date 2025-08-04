@@ -6,6 +6,11 @@ const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
     const intervalRef = useRef(null);
 
     const reset = useCallback(() => {
+        // ✅ Limpar intervalo atual antes de resetar
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
         setTimeLeft(durationSeconds);
         setIsRunning(true);
     }, [durationSeconds]);
@@ -35,6 +40,11 @@ const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
 
     useEffect(() => {
         if (isRunning && timeLeft > 0) {
+            // ✅ Limpar intervalo anterior antes de criar novo
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+
             intervalRef.current = setInterval(() => {
                 setTimeLeft(prev => {
                     if (prev === 1) {

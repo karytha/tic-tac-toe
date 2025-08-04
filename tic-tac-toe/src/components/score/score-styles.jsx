@@ -18,7 +18,7 @@ export const ScoreTitle = styled.h1`
   color: #333;
 `;
 
-export const ScoreValue = styled.p`
+export const ScoreValue = styled.div`
   font-size: 18px;
   margin: 4px 0;
   color: #555;

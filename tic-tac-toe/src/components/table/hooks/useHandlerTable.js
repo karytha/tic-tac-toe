@@ -6,7 +6,6 @@ import { useMessage } from "@/context/message-context";
 
 const INITIAL_STATE = Array(9).fill(null)
 
-
 const handleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
     const [currentPlayer, setCurrentPlayer] = useState('X');
@@ -17,11 +16,19 @@ const handleTable = () => {
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
+    const { timeLeft, reset, stopTimer } = useTurnPlayerTimer(5, () => {
+        if (!hasPlayedRef.current && !isGameOver) {
+            makeRandomMove();
+        }
+        if (!isGameOver) {
+            switchPlayer();
+        }
+    });
+
     const switchPlayer = () => {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
         hasPlayedRef.current = false;
     }
-
 
     const makeRandomMove = () => {
         if (winner || isGameOver) return;
@@ -35,28 +42,20 @@ const handleTable = () => {
         setTable(newTable);
         hasPlayedRef.current = true;
         switchPlayer();
+        reset(); // ✅ Reset timer após jogada automática
     };
-
-    const { timeLeft, reset, stopTimer } = useTurnPlayerTimer(5, () => {
-        if (!hasPlayedRef.current && !isGameOver) {
-            makeRandomMove();
-            reset()
-        }
-        if (!isGameOver) {
-            switchPlayer();
-        }
-    });
 
     const handleCellClick = (index) => {
         if (table[index] || winner || isGameOver) return;
+
         const newTable = [...table];
         newTable[index] = currentPlayer;
         setTable(newTable);
         hasPlayedRef.current = true;
-        switchPlayer();
-        reset();
-    }
 
+        switchPlayer();
+        reset(); // ✅ Reset timer após jogada manual
+    }
 
     const handleNewGame = useCallback(() => {
         setTable(INITIAL_STATE);
@@ -64,8 +63,8 @@ const handleTable = () => {
         setWinner(null);
         setIsGameOver(false);
         setMessage(TURN_PLAYER_LABEL);
-        reset();
-    }, [reset, setMessage]);
+        reset(); // ✅ Reset timer no início do jogo
+    }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
         setMessage('Nova Partida em 2 segundos...');
@@ -101,28 +100,45 @@ const handleTable = () => {
 
     const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
 
+    // ✅ Efeito para gerenciar mensagens durante o jogo
     useEffect(() => {
-        const winningPlayer = table[winCombination[0]?.[0]];
-        if (isGameOver && !winCombination.length > 0) {
-            startNewGameWithDelay();
-            setMessage(`Vencedor: ${winningPlayer}`);
-
-        }
-        if (!isGameOver && !winCombination.length > 0) {
+        if (!isGameOver && !winCombination.length && !isDraw) {
             setMessage(`${TURN_PLAYER_LABEL} ${currentPlayer}`);
         }
+    }, [currentPlayer, isGameOver, winCombination.length, isDraw, setMessage]);
+
+    // ✅ Efeito para gerenciar vitória e empate
+    useEffect(() => {
         if (winCombination.length > 0 && !isGameOver) {
+            const winningPlayer = table[winCombination[0]?.[0]];
             setWinner(winningPlayer);
             handlePoints(winningPlayer);
             setIsGameOver(true);
+            setMessage(`Vencedor: ${winningPlayer}`);
             stopTimer();
+            // ✅ Reset da tabela após vitória
+            setTimeout(() => {
+                setTable(INITIAL_STATE);
+            }, 2000);
         } else if (isDraw && !isGameOver) {
             setIsGameOver(true);
             setMessage(DRAW_LABEL);
             stopTimer();
+            // ✅ Reset da tabela após empate
+            setTimeout(() => {
+                setTable(INITIAL_STATE);
+            }, 2000);
         }
-    }, [table, isGameOver, isDraw, stopTimer, startNewGameWithDelay, currentPlayer, setMessage, handlePoints]);
+    }, [winCombination, isDraw, isGameOver, table, handlePoints, setMessage, stopTimer]);
 
+    // ✅ Efeito para iniciar nova partida após fim do jogo
+    useEffect(() => {
+        if (isGameOver) {
+            startNewGameWithDelay();
+        }
+    }, [isGameOver, startNewGameWithDelay]);
+
+    // Cleanup
     useEffect(() => {
         return () => {
             if (timeoutRef.current) {
@@ -147,4 +163,4 @@ const handleTable = () => {
     };
 }
 
-export default handleTable;
+export default handleTable; 

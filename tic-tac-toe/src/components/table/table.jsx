@@ -3,7 +3,7 @@
 import React from 'react'
 import { TableContainer, TableItem } from './table-styles'
 import Player from "@/components/player/player";
-import handleTable from './hooks/handleTable'
+import handleTable from './hooks/useHandlerTable'
 import { useColor } from '@/context/color-context';
 
 
