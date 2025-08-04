@@ -9,7 +9,7 @@ import { useColor } from '@/context/color-context';
 const Menu = () => {
     const [showMenu, setShowMenu] = useState(false);
     const { backgroundTableColor, setBackgroundTableColor, winnerColor, setWinnerColor, loserColor, setLoserColor, fontColor, setFontColor, fontColorX, setFontColorX, fontColorO, setFontColorO } = useColor();
-    console.log(backgroundTableColor, winnerColor, loserColor, fontColor, fontColorX, fontColorO);
+
     const handleClick = () => {
         setShowMenu(!showMenu);
     }

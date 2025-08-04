@@ -1,5 +1,5 @@
-import { useState } from "react";
-import handleTimer from "./useTurnPlayerTime";
+import { useState, useRef, useEffect } from "react";
+import useTurnPlayerTimer from "./useTurnPlayerTime";
 
 const INITIAL_STATE = Array(9).fill(null)
 
@@ -9,9 +9,11 @@ const handleTable = () => {
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const hasPlayedRef = useRef(false);
 
     const switchPlayer = () => {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+        hasPlayedRef.current = false;
     }
 
     const handleCellClick = (index) => {
@@ -19,8 +21,28 @@ const handleTable = () => {
         const newTable = [...table];
         newTable[index] = currentPlayer;
         setTable(newTable);
+        hasPlayedRef.current = true;
         switchPlayer();
+        reset();
     }
+
+    const makeRandomMove = () => {
+        if (winner || isGameOver) return;
+        const emptyIndices = table
+            .map((cell, index) => (cell === null ? index : null))
+            .filter(index => index !== null);
+        if (emptyIndices.length === 0) return;
+        const randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+        handleCellClick(randomIndex);
+    };
+
+    const { timeLeft, reset } = useTurnPlayerTimer(5, () => {
+        if (!hasPlayedRef.current) {
+            makeRandomMove();
+        }
+        switchPlayer();
+        reset();
+    });
 
     const handleNewGame = () => {
         setTable(INITIAL_STATE);
@@ -48,9 +70,17 @@ const handleTable = () => {
         );
     })
 
+    useEffect(() => {
+        if (winCombination.length > 0) {
+            setWinner(table[winCombination?.[0]?.[0]]);
+            setIsGameOver(true);
+            reset();
+        }
+    }, [winCombination]);
+
     const handlerColorCell = (index, tableColor, winColor) => winCombination[0]?.includes(index) ? winColor : tableColor
 
-    return { table, currentPlayer, winner, isGameOver, winCombination, handleNewGame, handlerColorCell, winner: table[winCombination?.[0]?.[0]], handleCellClick, switchPlayer };
+    return { table, currentPlayer, winner, isGameOver, winCombination, handleNewGame, handlerColorCell, winner: table[winCombination?.[0]?.[0]], timeLeft, handleCellClick, switchPlayer };
 }
 
 export default handleTable;

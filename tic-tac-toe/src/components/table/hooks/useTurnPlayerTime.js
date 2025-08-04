@@ -22,7 +22,6 @@ const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
 
         return () => clearInterval(intervalRef.current);
     }, [reset, onTimeout]);
-    console.log('timeLeft', timeLeft);
     return { timeLeft, reset };
 }
 

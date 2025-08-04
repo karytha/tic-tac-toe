@@ -1,14 +1,8 @@
 "use client";
 import Table from "@/components/table/table";
 import Menu from "@/components/menu/menu";
-import handleTable from "../table/hooks/handleTable";
 
-const Play = () => {
-    const { table, currentPlayer, isGameOver, handlerColorCell, winner, handleCellClick } = handleTable();
-
-
-    console.log('currentPlayerLabel', currentPlayer);
-
+const Game = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '40px', marginTop: '50px' }}>
 
@@ -21,4 +15,4 @@ const Play = () => {
     )
 }
 
-export default Play;
+export default Game;
