@@ -13,7 +13,7 @@ const handleTable = () => {
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
     const { handlePoints, points, setPoints } = usePoints();
-    const { setMessage, message } = useMessage();
+    const { setMessage } = useMessage();
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
@@ -23,13 +23,13 @@ const handleTable = () => {
         }
         if (!isGameOver) {
             switchPlayer();
-            reset();
         }
     });
 
     const switchPlayer = () => {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
         hasPlayedRef.current = false;
+        reset(); // ✅ Reset timer quando muda jogador
     }
 
     const makeRandomMove = () => {
@@ -44,19 +44,17 @@ const handleTable = () => {
         setTable(newTable);
         hasPlayedRef.current = true;
         switchPlayer();
-        reset();
     };
 
     const handleCellClick = (index) => {
         if (table[index] || winner || isGameOver) return;
-        const newTable = [...table];
-
-        console.log(currentPlayer);
-        newTable[index] = currentPlayer;
-        setTable(newTable);
-        hasPlayedRef.current = true;
-        switchPlayer();
-        reset();
+        if (index !== null) {
+            const newTable = [...table];
+            newTable[index] = currentPlayer;
+            setTable(newTable);
+            hasPlayedRef.current = true;
+            switchPlayer(); // ✅ Reset timer após jogada manual
+        }
     }
 
     const handleNewGame = useCallback(() => {
@@ -65,12 +63,11 @@ const handleTable = () => {
         setWinner(null);
         setIsGameOver(false);
         setMessage(TURN_PLAYER_LABEL);
-        reset();
+        reset(); // ✅ Reset timer no início do jogo
     }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
         setMessage(prev => prev + ' =>  Nova Partida em 2 segundos...');
-        reset();
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
@@ -138,12 +135,14 @@ const handleTable = () => {
             handlePoints(winningPlayer);
             setIsGameOver(true);
             setMessage(`Vencedor: ${winningPlayer}`);
+            stopTimer(); // ✅ Parar timer quando há vitória
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);
         } else if (isDraw && !isGameOver) {
             setIsGameOver(true);
-            setMessage(DRAW_LABEL)
+            setMessage(DRAW_LABEL);
+            stopTimer(); // ✅ Parar timer quando há empate
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);

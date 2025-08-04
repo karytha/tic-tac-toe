@@ -3,13 +3,10 @@
 import React from 'react'
 import { TableContainer, TableItem } from './table-styles'
 import Player from "@/components/player/player";
-import handleTable from './hooks/useHandlerTable'
 import { useColor } from '@/context/color-context';
 
-
-const Table = () => {
-
-  const { table, currentPlayer, isGameOver, handlerColorCell, winner, handleCellClick, switchPlayer, timeLeft } = handleTable();
+const Table = ({ gameState }) => {
+  const { table, currentPlayer, isGameOver, handlerColorCell, winner, handleCellClick, switchPlayer, timeLeft } = gameState;
   const { backgroundTableColor, winnerColor, loserColor, fontColor, fontColorX, fontColorO } = useColor();
 
   return (

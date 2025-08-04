@@ -11,7 +11,8 @@ import { useMessage } from "@/context/message-context";
 import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore } from "./game-styles";
 
 const Game = () => {
-    const { timeLeft, currentPlayer } = handleTable();
+    const gameState = handleTable();
+    const { timeLeft } = gameState;
     const { fontColorX, fontColorO } = useColor();
     const { points } = usePoints();
     const { message } = useMessage();
@@ -40,7 +41,7 @@ const Game = () => {
             </div>
 
             <TableAndScore>
-                <Table />
+                <Table gameState={gameState} />
                 <Score points={points} />
             </TableAndScore>
         </GameContainer>
