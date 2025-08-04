@@ -1,131 +1,108 @@
-# 🎮 Tic Tac Toe Game
+🎮 Tic Tac Toe Game
 
-Um jogo da velha interativo desenvolvido com **Next.js**, **React** e **Styled Components**.
+Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
-## 🚀 Como Rodar o Projeto
+🚀 Como rodar o projeto
 
-### Pré-requisitos
+Pré-requisitos:
 - Node.js (versão 16 ou superior)
 - npm ou yarn
 
-### Instalação
+Instalação:
 
-1. **Clone o repositório**
-```bash
-git clone <url-do-repositorio>
-cd tic-tac-toe
-```
+1. Clone o repositório:
+   git clone <url-do-repositorio>
+   cd tic-tac-toe
 
-2. **Instale as dependências**
-```bash
-npm install
-```
+2. Instale as dependências:
+   npm install
 
-3. **Execute o projeto**
-```bash
-npm run dev
-```
+3. Execute o projeto:
+   npm run dev
 
-4. **Acesse o jogo**
-Abra seu navegador e acesse: `http://localhost:3000`
+4. Acesse em:
+   http://localhost:3000
 
-## 🎯 Funcionalidades do Jogo
+🎯 Funcionalidades
 
-### ✨ Características Principais
+Principais recursos:
+- Tabuleiro 3x3 com jogadores X e O
+- Timer de 5 segundos por jogada
+- Jogadas automáticas ao esgotar o tempo
+- Contador de vitórias por jogador
+- Interface com opções de personalização de cores
+- Reinício automático após o término da partida
 
-- **Jogo da Velha Clássico**: Tabuleiro 3x3 com jogadores X e O
-- **Timer Automático**: 5 segundos por jogada
-- **Jogada Automática**: Se o jogador não jogar no tempo, o sistema faz uma jogada aleatória
-- **Sistema de Pontos**: Conta vitórias de cada jogador
-- **Cores Personalizáveis**: Interface com tema futurista
-- **Auto-restart**: Nova partida automaticamente após 2 segundos
+Personalização:
+- Cor de fundo do tabuleiro
+- Cores dos jogadores (X e O)
+- Cor de destaque para células vencedoras
+- Cor da fonte
 
-### 🎨 Personalização
+Tempo e jogadas:
+- Tempo limite de 5 segundos por jogada
+- Jogadas automáticas ao esgotar o tempo
+- Alternância automática entre jogadores
+- Reinício automático após 2 segundos
 
-- **Cores do Tabuleiro**: Personalize a cor de fundo
-- **Cores dos Jogadores**: Diferentes cores para X e O
-- **Cores de Vitória**: Destaque para células vencedoras
-- **Cores de Fonte**: Personalize as cores dos textos
+🏗️ Estrutura de pastas
 
-### ⏱️ Timer e Jogadas
-
-- **Timer de 5 segundos** por jogada
-- **Jogada automática** se o tempo esgotar
-- **Troca automática** de jogadores
-- **Pausa de 2 segundos** entre partidas
-
-## 🏗️ Estrutura do Projeto
-
-```
 src/
-├── app/                    # Páginas Next.js
-├── components/             # Componentes React
-│   ├── game/              # Componente principal do jogo
-│   ├── table/             # Tabuleiro do jogo
-│   ├── player/            # Componente dos jogadores
-│   ├── timer/             # Timer do jogo
-│   ├── menu/              # Menu de configurações
-│   └── score/             # Placar de pontos
-├── context/               # Contextos React
-│   ├── color-context.jsx  # Gerenciamento de cores
-│   ├── points-context.jsx # Sistema de pontuação
-│   └── message-context.jsx # Mensagens do jogo
-├── constants/             # Constantes do projeto
-└── hooks/                 # Hooks customizados
-```
+├── app/                    # Páginas (Next.js App Router)
+├── components/             # Componentes visuais
+│   ├── game/               # Componente principal do jogo
+│   ├── table/              # Tabuleiro
+│   ├── player/             # Informações dos jogadores
+│   ├── timer/              # Temporizador
+│   ├── menu/               # Menu de configurações
+│   └── score/              # Placar
+├── context/                # Contextos globais
+│   ├── color-context.jsx   # Cores do jogo
+│   ├── points-context.jsx  # Pontuação
+│   └── message-context.jsx # Mensagens exibidas
+├── constants/              # Constantes do sistema
+└── hooks/                  # Hooks personalizados
 
-## 🎮 Como Jogar
+🎮 Instruções de uso
 
-### Regras Básicas
-1. **Objetivo**: Alinhar 3 símbolos (X ou O) em linha
-2. **Jogadores**: X sempre começa
-3. **Timer**: 5 segundos por jogada
-4. **Vitória**: Primeiro a alinhar 3 símbolos vence
+Regras:
+1. Alinhar 3 símbolos (X ou O) em linha, coluna ou diagonal
+2. O jogador X sempre inicia
+3. Cada jogada deve ser feita em até 5 segundos
+4. O primeiro a alinhar 3 símbolos vence
 
-### Controles
-- **Clique**: Faça sua jogada clicando em uma célula vazia
-- **Timer**: Observe o tempo restante para sua jogada
-- **Menu**: Configure cores e outras opções
-- **Pontuação**: Acompanhe seus pontos no placar
+Controles:
+- Clique em uma célula vazia para jogar
+- O temporizador exibe o tempo restante
+- O menu permite personalizar as cores
+- O placar mostra a pontuação atual
 
-### Estados do Jogo
-- **Jogando**: Timer ativo, aguardando jogada
-- **Vitória**: Jogador vence, timer para
-- **Empate**: Tabuleiro cheio sem vencedor
-- **Auto-restart**: Nova partida em 2 segundos
+Estados possíveis:
+- Em jogo: aguardando jogada
+- Vitória: jogador vence a partida
+- Empate: tabuleiro completo sem vencedor
+- Reinício: nova partida após 2 segundos
 
-## 🛠️ Tecnologias Utilizadas
+🛠️ Tecnologias
 
-- **Next.js 14**: Framework React com App Router
-- **React 18**: Biblioteca para interface
-- **Styled Components**: Estilização CSS-in-JS
-- **Context API**: Gerenciamento de estado global
-- **Custom Hooks**: Lógica reutilizável
+- Next.js 14 – Framework React com App Router
+- React 18 – Biblioteca para interface do usuário
+- Styled Components – Estilização com CSS-in-JS
+- Context API – Gerenciamento de estado global
+- Hooks personalizados – Lógica reutilizável
 
-## 🎨 Sistema de Cores
+🎨 Cores
 
-### Contexto de Cores
-O jogo usa um sistema de cores personalizável através do `ColorContext`:
+Gerenciadas pelo ColorContext:
+- Cor de fundo do tabuleiro
+- Cor do jogador X
+- Cor do jogador O
+- Cor das células vencedoras
+- Cor da fonte dos textos
 
-- **Cor do Tabuleiro**: Fundo do tabuleiro
-- **Cor do X**: Cor do jogador X
-- **Cor do O**: Cor do jogador O
-- **Cor de Vitória**: Destaque para células vencedoras
-- **Cor da Fonte**: Cor dos textos
+⚙️ Otimizações
 
-## ⚡ Performance
-
-### Otimizações Implementadas
-- **useCallback**: Funções memoizadas
-- **useMemo**: Cálculos otimizados
-- **Context API**: Estado global eficiente
-- **Styled Components**: CSS otimizado
-
-### Estrutura Modular
-- **Componentes reutilizáveis**
-- **Hooks customizados**
-- **Contextos separados**
-- **Lógica isolada**
-
-
-
+- useCallback para evitar recriação de funções
+- useMemo para memorizar valores derivados
+- Componentes modulares reutilizáveis
+- Separação de lógica e apresentação
