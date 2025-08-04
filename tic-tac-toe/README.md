@@ -45,23 +45,23 @@ Tempo e jogadas:
 - Alternância automática entre jogadores
 - Reinício automático após 2 segundos
 
-🏗️ Estrutura de pastas
+* Estrutura de pastas
 
 src/
-├── app/                    // Páginas (Next.js App Router)
-├── components/             // Componentes visuais
-│   ├── game/               // Componente principal do jogo
-│   ├── table/              // Tabuleiro
-│   ├── player/             // Informações dos jogadores
-│   ├── timer/              // Temporizador
-│   ├── menu/               // Menu de configurações
-│   └── score/              // Placar
-├── context/                // Contextos globais
-│   ├── color-context.jsx   // Cores do jogo
-│   ├── points-context.jsx  // Pontuação
-│   └── message-context.jsx // Mensagens exibidas
-├── constants/              // Constantes do sistema
-└── hooks/                  // Hooks personalizados
+├── app/                    # Páginas (Next.js App Router)
+├── components/             # Componentes visuais
+│   ├── game/               # Componente principal do jogo
+│   ├── table/              # Tabuleiro
+│   ├── player/             # Informações dos jogadores
+│   ├── timer/              # Temporizador
+│   ├── menu/               # Menu de configurações
+│   └── score/              # Placar
+├── context/                # Contextos globais
+│   ├── color-context.jsx   # Cores do jogo
+│   ├── points-context.jsx  # Pontuação
+│   └── message-context.jsx # Mensagens exibidas
+├── constants/              # Constantes do sistema
+└── hooks/                  # Hooks personalizados
 
 *Instruções de uso
 
