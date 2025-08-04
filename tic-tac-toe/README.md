@@ -99,9 +99,3 @@ Gerenciadas pelo ColorContext:
 - Cor das células vencedoras
 - Cor da fonte dos textos
 
- *Otimizações
-
-- useCallback para evitar recriação de funções
-- useMemo para memorizar valores derivados
-- Componentes modulares reutilizáveis
-- Separação de lógica e apresentação
