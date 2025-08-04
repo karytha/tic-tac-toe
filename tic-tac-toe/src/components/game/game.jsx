@@ -22,7 +22,7 @@ const Game = () => {
         <GameContainer>
             <div>
                 <Header>
-                    <h1>Tic Tac Toe</h1>
+                    <h1>Jogo da velha</h1>
                     <Menu />
                 </Header>
 
