@@ -2,13 +2,13 @@
 import { BotaoMenu, ContainerMenu, MenuFlutuante } from './menu-styles';
 import { useState } from 'react';
 import ColorSelectorT from '../color-selector/color-selector';
-import { BACKGROUND_TABLE_COLOR_LABEL, WINNER_COLOR_LABEL, LOSER_COLOR_LABEL, FONT_COLOR_LABEL, FONT_COLOR_X_LABEL, FONT_COLOR_O_LABEL, MENU_LABEL } from '@constants/constantes';
+import { BACKGROUND_TABLE_COLOR_LABEL, WINNER_COLOR_LABEL, FONT_COLOR_X_LABEL, FONT_COLOR_O_LABEL, MENU_LABEL } from '@constants/constantes';
 
 import { useColor } from '@/context/color-context';
 
 const Menu = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const { backgroundTableColor, setBackgroundTableColor, winnerColor, setWinnerColor, loserColor, setLoserColor, fontColor, setFontColor, fontColorX, setFontColorX, fontColorO, setFontColorO } = useColor();
+    const { backgroundTableColor, setBackgroundTableColor, winnerColor, setWinnerColor, fontColorX, setFontColorX, fontColorO, setFontColorO } = useColor();
 
     const handleClick = () => {
         setShowMenu(!showMenu);

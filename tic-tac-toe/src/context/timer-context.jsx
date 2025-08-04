@@ -1,6 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+"use client"
+import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 
-const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
+const TimerContext = createContext();
+
+export const useTimer = () => {
+    return useContext(TimerContext);
+};
+
+export const TimerProvider = ({ children }) => {
+    const [durationSeconds, setDurationSeconds] = useState(5);
     const [timeLeft, setTimeLeft] = useState(durationSeconds);
     const [isRunning, setIsRunning] = useState(true);
     const intervalRef = useRef(null);
@@ -49,7 +57,6 @@ const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
                         clearInterval(intervalRef.current);
                         intervalRef.current = null;
                         setIsRunning(false);
-                        onTimeout?.();
                         return 0;
                     }
                     return prev - 1;
@@ -63,16 +70,11 @@ const useTurnPlayerTimer = (durationSeconds = 5, onTimeout) => {
                 intervalRef.current = null;
             }
         };
-    }, [isRunning, timeLeft, onTimeout]);
+    }, [isRunning, timeLeft]);
 
-    return {
-        timeLeft,
-        reset,
-        stopTimer,
-        pauseTimer,
-        resumeTimer,
-        isRunning
-    };
+    return (
+        <TimerContext.Provider value={{ timeLeft, setTimeLeft, setDurationSeconds, durationSeconds, isRunning, setIsRunning, reset, stopTimer, pauseTimer, resumeTimer }}>
+            {children}
+        </TimerContext.Provider>
+    );
 }
-
-export default useTurnPlayerTimer;

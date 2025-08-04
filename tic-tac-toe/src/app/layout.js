@@ -3,7 +3,8 @@ import "./globals.css";
 import { ColorProvider } from "@/context/color-context";
 import { PointsProvider } from "@/context/points-context";
 import { MessageProvider } from "@/context/message-context";
-  
+import { TimerProvider } from "@/context/timer-context";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ColorProvider>
           <PointsProvider>
-            <MessageProvider>
-              {children}
-            </MessageProvider>
+            <TimerProvider>
+              <MessageProvider>
+                {children}
+              </MessageProvider>
+            </TimerProvider>
           </PointsProvider>
         </ColorProvider>
       </body>

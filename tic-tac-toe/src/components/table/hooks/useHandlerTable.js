@@ -16,12 +16,13 @@ const handleTable = () => {
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
-    const { timeLeft, reset, stopTimer } = useTurnPlayerTimer(5, () => {
+    const { timeLeft, reset, stopTimer, setTimeLeft } = useTurnPlayerTimer(5, () => {
         if (!hasPlayedRef.current && !isGameOver) {
             makeRandomMove();
         }
         if (!isGameOver) {
             switchPlayer();
+            reset();
         }
     });
 
@@ -42,19 +43,19 @@ const handleTable = () => {
         setTable(newTable);
         hasPlayedRef.current = true;
         switchPlayer();
-        reset(); // ✅ Reset timer após jogada automática
+        reset();
     };
 
     const handleCellClick = (index) => {
         if (table[index] || winner || isGameOver) return;
-
         const newTable = [...table];
+
+        console.log(currentPlayer);
         newTable[index] = currentPlayer;
         setTable(newTable);
         hasPlayedRef.current = true;
-
         switchPlayer();
-        reset(); // ✅ Reset timer após jogada manual
+        reset();
     }
 
     const handleNewGame = useCallback(() => {
@@ -63,12 +64,12 @@ const handleTable = () => {
         setWinner(null);
         setIsGameOver(false);
         setMessage(TURN_PLAYER_LABEL);
-        reset(); // ✅ Reset timer no início do jogo
+        reset();
     }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
         setMessage('Nova Partida em 2 segundos...');
-
+        reset();
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
@@ -100,14 +101,13 @@ const handleTable = () => {
 
     const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
 
-    // ✅ Efeito para gerenciar mensagens durante o jogo
+
     useEffect(() => {
         if (!isGameOver && !winCombination.length && !isDraw) {
             setMessage(`${TURN_PLAYER_LABEL} ${currentPlayer}`);
         }
     }, [currentPlayer, isGameOver, winCombination.length, isDraw, setMessage]);
 
-    // ✅ Efeito para gerenciar vitória e empate
     useEffect(() => {
         if (winCombination.length > 0 && !isGameOver) {
             const winningPlayer = table[winCombination[0]?.[0]];
@@ -115,23 +115,18 @@ const handleTable = () => {
             handlePoints(winningPlayer);
             setIsGameOver(true);
             setMessage(`Vencedor: ${winningPlayer}`);
-            stopTimer();
-            // ✅ Reset da tabela após vitória
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);
         } else if (isDraw && !isGameOver) {
             setIsGameOver(true);
-            setMessage(DRAW_LABEL);
-            stopTimer();
-            // ✅ Reset da tabela após empate
+            setMessage(DRAW_LABEL)
             setTimeout(() => {
                 setTable(INITIAL_STATE);
             }, 2000);
         }
     }, [winCombination, isDraw, isGameOver, table, handlePoints, setMessage, stopTimer]);
 
-    // ✅ Efeito para iniciar nova partida após fim do jogo
     useEffect(() => {
         if (isGameOver) {
             startNewGameWithDelay();
