@@ -1,4 +1,5 @@
 import { useState } from "react";
+import handleTimer from "./useTurnPlayerTime";
 
 const INITIAL_STATE = Array(9).fill(null)
 
@@ -9,12 +10,23 @@ const handleTable = () => {
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
 
+    const switchPlayer = () => {
+        setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    }
+
     const handleCellClick = (index) => {
         if (table[index] || winner || isGameOver) return;
         const newTable = [...table];
         newTable[index] = currentPlayer;
         setTable(newTable);
-        setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+        switchPlayer();
+    }
+
+    const handleNewGame = () => {
+        setTable(INITIAL_STATE);
+        setCurrentPlayer('X');
+        setWinner(null);
+        setIsGameOver(false);
     }
 
     const winningCombinations = [
@@ -38,7 +50,7 @@ const handleTable = () => {
 
     const handlerColorCell = (index, tableColor, winColor) => winCombination[0]?.includes(index) ? winColor : tableColor
 
-    return { table, currentPlayer, winner, isGameOver, winCombination, handlerColorCell, winner: table[winCombination?.[0]?.[0]], handleCellClick };
+    return { table, currentPlayer, winner, isGameOver, winCombination, handleNewGame, handlerColorCell, winner: table[winCombination?.[0]?.[0]], handleCellClick, switchPlayer };
 }
 
 export default handleTable;
