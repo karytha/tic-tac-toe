@@ -21,7 +21,7 @@ export const LOAD_GAME_LABEL = 'Carregar jogo';
 export const EXIT_LABEL = 'Sair';
 
 export const MENU_LABEL = 'Menu';
-export const GAME_TITLE = 'Tic Tac Toe';
+export const GAME_TITLE = 'Jogo da velha';
 export const SCORE_LABEL = 'Pontuação';
 export const POINTS_LABEL = 'Pontos';
 

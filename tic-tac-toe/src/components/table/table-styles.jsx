@@ -57,12 +57,12 @@ export const TableItem = styled.div.withConfig({
   }
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: transparent;
     transform: scale(1.02);
   }
   
   &:active {
-    background-color: #c0c0c0;
+    background-color:rgba(192, 192, 192, 0.19);
     transform: scale(0.98);
   }
 `;
