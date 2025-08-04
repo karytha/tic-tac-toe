@@ -2,7 +2,7 @@
 
 Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
-🚀 Como rodar o projeto
+* Como rodar o projeto
 
 Pré-requisitos:
 - Node.js (versão 16 ou superior)
@@ -23,7 +23,7 @@ Instalação:
 4. Acesse em:
    http://localhost:3000
 
-🎯 Funcionalidades
+* Funcionalidades
 
 Principais recursos:
 - Tabuleiro 3x3 com jogadores X e O
@@ -48,22 +48,22 @@ Tempo e jogadas:
 🏗️ Estrutura de pastas
 
 src/
-├── app/                    # Páginas (Next.js App Router)
-├── components/             # Componentes visuais
-│   ├── game/               # Componente principal do jogo
-│   ├── table/              # Tabuleiro
-│   ├── player/             # Informações dos jogadores
-│   ├── timer/              # Temporizador
-│   ├── menu/               # Menu de configurações
-│   └── score/              # Placar
-├── context/                # Contextos globais
-│   ├── color-context.jsx   # Cores do jogo
-│   ├── points-context.jsx  # Pontuação
-│   └── message-context.jsx # Mensagens exibidas
-├── constants/              # Constantes do sistema
-└── hooks/                  # Hooks personalizados
+├── app/                    // Páginas (Next.js App Router)
+├── components/             // Componentes visuais
+│   ├── game/               // Componente principal do jogo
+│   ├── table/              // Tabuleiro
+│   ├── player/             // Informações dos jogadores
+│   ├── timer/              // Temporizador
+│   ├── menu/               // Menu de configurações
+│   └── score/              // Placar
+├── context/                // Contextos globais
+│   ├── color-context.jsx   // Cores do jogo
+│   ├── points-context.jsx  // Pontuação
+│   └── message-context.jsx // Mensagens exibidas
+├── constants/              // Constantes do sistema
+└── hooks/                  // Hooks personalizados
 
-🎮 Instruções de uso
+*Instruções de uso
 
 Regras:
 1. Alinhar 3 símbolos (X ou O) em linha, coluna ou diagonal
@@ -71,19 +71,19 @@ Regras:
 3. Cada jogada deve ser feita em até 5 segundos
 4. O primeiro a alinhar 3 símbolos vence
 
-Controles:
+* Controles:
 - Clique em uma célula vazia para jogar
 - O temporizador exibe o tempo restante
 - O menu permite personalizar as cores
 - O placar mostra a pontuação atual
 
-Estados possíveis:
+* Estados possíveis:
 - Em jogo: aguardando jogada
 - Vitória: jogador vence a partida
 - Empate: tabuleiro completo sem vencedor
 - Reinício: nova partida após 2 segundos
 
-🛠️ Tecnologias
+* Tecnologias
 
 - Next.js 14 – Framework React com App Router
 - React 18 – Biblioteca para interface do usuário
@@ -91,8 +91,7 @@ Estados possíveis:
 - Context API – Gerenciamento de estado global
 - Hooks personalizados – Lógica reutilizável
 
-🎨 Cores
-
+*Cores
 Gerenciadas pelo ColorContext:
 - Cor de fundo do tabuleiro
 - Cor do jogador X
@@ -100,7 +99,7 @@ Gerenciadas pelo ColorContext:
 - Cor das células vencedoras
 - Cor da fonte dos textos
 
-⚙️ Otimizações
+ *Otimizações
 
 - useCallback para evitar recriação de funções
 - useMemo para memorizar valores derivados
