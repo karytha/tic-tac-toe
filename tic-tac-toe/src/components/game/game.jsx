@@ -2,7 +2,7 @@
 import Table from "@/components/table/table";
 import Menu from "@/components/menu/menu";
 import Timer from "@/components/timer/timer";
-import handleTable from "../table/hooks/useHandlerTable";
+import useHandleGame from "../table/hooks/";
 import Player from "../player/player";
 import { useColor } from "@/context/color-context";
 import Score from "../score/score";
@@ -11,7 +11,7 @@ import { useMessage } from "@/context/message-context";
 import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore } from "./game-styles";
 
 const Game = () => {
-    const gameState = handleTable();
+    const gameState = useHandleGame();
     const { timeLeft } = gameState;
     const { fontColorX, fontColorO } = useColor();
     const { points } = usePoints();

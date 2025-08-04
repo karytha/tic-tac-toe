@@ -7,7 +7,7 @@ import { useMessage } from "@/context/message-context";
 const INITIAL_STATE = Array(9).fill(null)
 const WIN_POINTS = 11;
 
-const handleTable = () => {
+const useHandleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
@@ -180,4 +180,4 @@ const handleTable = () => {
     };
 }
 
-export default handleTable; 
+export default useHandleTable; 
