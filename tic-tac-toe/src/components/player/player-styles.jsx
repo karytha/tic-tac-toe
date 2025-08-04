@@ -8,6 +8,7 @@ export const PlayerContainer = styled.div`
   padding: 10px;
   border-radius: 8px;
   transition: all 0.3s ease;
+
   
   &:hover {
     background-color: rgba(0, 234, 255, 0.05);
@@ -43,7 +44,7 @@ export const PlayerName = styled.h1`
   margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #fff;  
+  color: gray;  
   transition: all 0.3s ease;
   
   @media (max-width: 768px) {

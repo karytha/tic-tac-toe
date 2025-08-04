@@ -4,6 +4,7 @@ import { ColorProvider } from "@/context/color-context";
 import { PointsProvider } from "@/context/points-context";
 import { MessageProvider } from "@/context/message-context";
 import { TimerProvider } from "@/context/timer-context";
+import { APP_TITLE, APP_DESCRIPTION, APP_LANGUAGE } from "@/constants/constantes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,13 +17,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Tic Tac Toe Game",
-  description: "Jogo da velha responsivo",
+  title: APP_TITLE,
+  description: APP_DESCRIPTION,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR">
+    <html lang={APP_LANGUAGE}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>

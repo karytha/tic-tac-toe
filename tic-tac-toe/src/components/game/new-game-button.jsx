@@ -1,4 +1,5 @@
 import React from 'react';
+import { NEW_GAME_BUTTON_TEXT, NEW_GAME_INVITATION_TEXT } from "@/constants/constantes";
 
 const NewGameButton = ({ onStartGame }) => {
     return (
@@ -30,7 +31,7 @@ const NewGameButton = ({ onStartGame }) => {
                 zIndex: 1001,
                 lineHeight: '1.2'
             }}>
-                Vamos jogar o jogo da velha?
+                {NEW_GAME_INVITATION_TEXT}
             </div>
 
             <button
@@ -63,7 +64,7 @@ const NewGameButton = ({ onStartGame }) => {
                     e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
                 }}
             >
-                NOVO JOGO
+                {NEW_GAME_BUTTON_TEXT}
             </button>
         </div>
     );

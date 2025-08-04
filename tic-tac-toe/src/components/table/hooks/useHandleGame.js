@@ -1,15 +1,26 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import useTurnPlayerTimer from "./useTurnPlayerTime";
-import { TURN_PLAYER_LABEL, DRAW_LABEL } from "@/constants/constantes";
+import {
+    TURN_PLAYER_LABEL,
+    DRAW_LABEL,
+    WIN_POINTS,
+    TIMER_DURATION,
+    GAME_DELAY,
+    CHAMPIONSHIP_DELAY,
+    CHAMPIONSHIP_WIN_MESSAGE,
+    NEW_MATCH_DELAY_MESSAGE,
+    INITIAL_MESSAGE,
+    X_LABEL,
+    O_LABEL
+} from "@/constants/constantes";
 import { usePoints } from "@/context/points-context";
 import { useMessage } from "@/context/message-context";
 
 const INITIAL_STATE = Array(9).fill(null)
-const WIN_POINTS = 3;
 
 const useHandleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
-    const [currentPlayer, setCurrentPlayer] = useState('X');
+    const [currentPlayer, setCurrentPlayer] = useState(X_LABEL);
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
     const [isGameStarted, setIsGameStarted] = useState(false); // ✅ Novo estado para controlar início do jogo
@@ -18,7 +29,7 @@ const useHandleTable = () => {
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
-    const { timeLeft, reset, stopTimer, setTimeLeft } = useTurnPlayerTimer(5, () => {
+    const { timeLeft, reset, stopTimer, setTimeLeft } = useTurnPlayerTimer(TIMER_DURATION, () => {
         if (!hasPlayedRef.current && !isGameOver && isGameStarted) {
             makeRandomMove();
         }
@@ -28,7 +39,7 @@ const useHandleTable = () => {
     });
 
     const switchPlayer = () => {
-        setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+        setCurrentPlayer(currentPlayer === X_LABEL ? O_LABEL : X_LABEL);
         hasPlayedRef.current = false;
         reset();
     }
@@ -61,7 +72,7 @@ const useHandleTable = () => {
     // ✅ Nova função para iniciar o jogo
     const startGame = useCallback(() => {
         setTable(INITIAL_STATE);
-        setCurrentPlayer('X');
+        setCurrentPlayer(X_LABEL);
         setWinner(null);
         setIsGameOver(false);
         setIsGameStarted(true); // ✅ Marcar jogo como iniciado
@@ -71,7 +82,7 @@ const useHandleTable = () => {
 
     const handleNewGame = useCallback(() => {
         setTable(INITIAL_STATE);
-        setCurrentPlayer('X');
+        setCurrentPlayer(X_LABEL);
         setWinner(null);
         setIsGameOver(false);
         setIsGameStarted(true); // ✅ Manter jogo iniciado
@@ -80,14 +91,14 @@ const useHandleTable = () => {
     }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
-        setMessage(prev => prev + ' =>  Nova Partida em 2 segundos...');
+        setMessage(prev => prev + NEW_MATCH_DELAY_MESSAGE);
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
         }
 
         timeoutRef.current = setTimeout(() => {
             handleNewGame();
-        }, 2000);
+        }, GAME_DELAY);
     }, [handleNewGame, setMessage]);
 
     const winningCombinations = [
@@ -115,19 +126,19 @@ const useHandleTable = () => {
     useEffect(() => {
         if (!points || isGameOver) return;
 
-        const winnerKey = points.X >= WIN_POINTS ? 'X' : points.O >= WIN_POINTS ? 'O' : null;
+        const winnerKey = points.X >= WIN_POINTS ? X_LABEL : points.O >= WIN_POINTS ? O_LABEL : null;
 
         if (winnerKey) {
             setWinner(winnerKey);
             setIsGameOver(true);
             setIsGameStarted(false); // ✅ Parar jogo após vitória do campeonato
-            setMessage(`Jogador ${winnerKey} venceu o campeonato!`);
+            setMessage(`Jogador ${winnerKey} ${CHAMPIONSHIP_WIN_MESSAGE}`);
             stopTimer();
 
             setTimeout(() => {
                 setPoints({ X: 0, O: 0 });
                 setTable(INITIAL_STATE);
-            }, 3000);
+            }, CHAMPIONSHIP_DELAY);
         }
     }, [points, isGameOver, setMessage, stopTimer, setPoints]);
 
@@ -143,20 +154,20 @@ const useHandleTable = () => {
             setWinner(winningPlayer);
             handlePoints(winningPlayer);
             setIsGameOver(true);
-            setMessage(points[winningPlayer] + 1 === WIN_POINTS ? `Jogador ${winningPlayer} venceu o campeonato!` : `Vencedor: ${winningPlayer}`);
+            setMessage(points[winningPlayer] + 1 === WIN_POINTS ? `Jogador ${winningPlayer} ${CHAMPIONSHIP_WIN_MESSAGE}` : `Vencedor: ${winningPlayer}`);
             stopTimer();
             setTimeout(() => {
                 setTable(INITIAL_STATE);
-            }, 2000);
+            }, GAME_DELAY);
         } else if (isDraw && !isGameOver) {
             setIsGameOver(true);
             setMessage(DRAW_LABEL);
             stopTimer();
             setTimeout(() => {
                 setTable(INITIAL_STATE);
-            }, 2000);
+            }, GAME_DELAY);
         }
-    }, [winCombination, isDraw, isGameOver, table, handlePoints, setMessage, stopTimer]);
+    }, [winCombination, isDraw, isGameOver, table, handlePoints, setMessage, stopTimer, points]);
 
     useEffect(() => {
         if (isGameOver) {

@@ -4,6 +4,7 @@ import React from 'react'
 import { TableContainer, TableItem } from './table-styles'
 import Player from "@/components/player/player";
 import { useColor } from '@/context/color-context';
+import { X_LABEL, O_LABEL } from '@/constants/constantes';
 
 const Table = ({ gameState }) => {
   const { table, currentPlayer, isGameOver, handlerColorCell, winner, handleCellClick, switchPlayer, timeLeft, isGameStarted } = gameState;
@@ -16,7 +17,7 @@ const Table = ({ gameState }) => {
           key={index}
           onClick={() => handleCellClick(index)}
           background={handlerColorCell(index, backgroundTableColor, winnerColor)}
-          color={item === 'X' ? fontColorX : fontColorO}
+          color={item === X_LABEL ? fontColorX : fontColorO}
           style={{
             cursor: isGameStarted ? 'pointer' : 'not-allowed',
             opacity: isGameStarted ? 1 : 0.6,

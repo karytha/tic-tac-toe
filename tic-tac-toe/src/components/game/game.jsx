@@ -10,6 +10,7 @@ import Score from "../score/score";
 import { usePoints } from "@/context/points-context";
 import { useMessage } from "@/context/message-context";
 import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore } from "./game-styles";
+import { GAME_TITLE, X_LABEL, O_LABEL } from "@/constants/constantes";
 
 const Game = () => {
     const gameState = useHandleGame();
@@ -22,7 +23,7 @@ const Game = () => {
         <GameContainer>
             <div>
                 <Header>
-                    <h1>Jogo da velha</h1>
+                    <h1>{GAME_TITLE}</h1>
                     <Menu />
                 </Header>
 
@@ -31,11 +32,11 @@ const Game = () => {
                 <PlayersAndTimer>
                     <div>
                         <Player
-                            player="X"
+                            player={X_LABEL}
                             currentColor={fontColorX}
                         />
                         <Player
-                            player="O"
+                            player={O_LABEL}
                             currentColor={fontColorO}
                         />
                     </div>
