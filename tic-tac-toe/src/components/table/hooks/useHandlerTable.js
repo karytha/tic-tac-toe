@@ -5,6 +5,7 @@ import { usePoints } from "@/context/points-context";
 import { useMessage } from "@/context/message-context";
 
 const INITIAL_STATE = Array(9).fill(null)
+const WIN_POINTS = 11;
 
 const handleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
@@ -102,7 +103,7 @@ const handleTable = () => {
     const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
 
     useEffect(() => {
-        if (points?.X >= 2 && !isGameOver) {
+        if (points?.X >= WIN_POINTS && !isGameOver) {
             setWinner('X');
             setIsGameOver(true);
             setMessage('Jogador X venceu o campeonato!');
@@ -112,7 +113,7 @@ const handleTable = () => {
                 setPoints({ X: 0, O: 0 });
                 setTable(INITIAL_STATE);
             }, 3000);
-        } else if (points?.O >= 2 && !isGameOver) {
+        } else if (points?.O >= WIN_POINTS && !isGameOver) {
             setWinner('O');
             setIsGameOver(true);
             setMessage('Jogador O venceu o campeonato!');
