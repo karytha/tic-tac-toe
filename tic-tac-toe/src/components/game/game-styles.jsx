@@ -41,4 +41,5 @@ export const TableAndScore = styled.div`
   gap: 20px;
   width: 100%;
   margin-top: 20px;
+  position: relative;
 `;

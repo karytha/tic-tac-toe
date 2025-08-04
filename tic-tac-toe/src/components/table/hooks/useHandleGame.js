@@ -5,23 +5,24 @@ import { usePoints } from "@/context/points-context";
 import { useMessage } from "@/context/message-context";
 
 const INITIAL_STATE = Array(9).fill(null)
-const WIN_POINTS = 11;
+const WIN_POINTS = 3;
 
 const useHandleTable = () => {
     const [table, setTable] = useState(INITIAL_STATE);
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false); // ✅ Novo estado para controlar início do jogo
     const { handlePoints, points, setPoints } = usePoints();
     const { setMessage } = useMessage();
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
     const { timeLeft, reset, stopTimer, setTimeLeft } = useTurnPlayerTimer(5, () => {
-        if (!hasPlayedRef.current && !isGameOver) {
+        if (!hasPlayedRef.current && !isGameOver && isGameStarted) {
             makeRandomMove();
         }
-        if (!isGameOver) {
+        if (!isGameOver && isGameStarted) {
             switchPlayer();
         }
     });
@@ -29,11 +30,11 @@ const useHandleTable = () => {
     const switchPlayer = () => {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
         hasPlayedRef.current = false;
-        reset(); // ✅ Reset timer quando muda jogador
+        reset();
     }
 
     const makeRandomMove = () => {
-        if (winner || isGameOver) return;
+        if (winner || isGameOver || !isGameStarted) return;
         const emptyIndices = table
             .map((cell, index) => (cell === null ? index : null))
             .filter(index => index !== null);
@@ -47,7 +48,7 @@ const useHandleTable = () => {
     };
 
     const handleCellClick = (index) => {
-        if (table[index] || winner || isGameOver) return;
+        if (table[index] || winner || isGameOver || !isGameStarted) return; // ✅ Verificar se jogo foi iniciado
         if (index !== null) {
             const newTable = [...table];
             newTable[index] = currentPlayer;
@@ -57,11 +58,23 @@ const useHandleTable = () => {
         }
     }
 
+    // ✅ Nova função para iniciar o jogo
+    const startGame = useCallback(() => {
+        setTable(INITIAL_STATE);
+        setCurrentPlayer('X');
+        setWinner(null);
+        setIsGameOver(false);
+        setIsGameStarted(true); // ✅ Marcar jogo como iniciado
+        setMessage(TURN_PLAYER_LABEL);
+        reset(); // ✅ Iniciar timer
+    }, [setMessage, reset]);
+
     const handleNewGame = useCallback(() => {
         setTable(INITIAL_STATE);
         setCurrentPlayer('X');
         setWinner(null);
         setIsGameOver(false);
+        setIsGameStarted(true); // ✅ Manter jogo iniciado
         setMessage(TURN_PLAYER_LABEL);
         reset();
     }, [setMessage, reset]);
@@ -107,6 +120,7 @@ const useHandleTable = () => {
         if (winnerKey) {
             setWinner(winnerKey);
             setIsGameOver(true);
+            setIsGameStarted(false); // ✅ Parar jogo após vitória do campeonato
             setMessage(`Jogador ${winnerKey} venceu o campeonato!`);
             stopTimer();
 
@@ -118,14 +132,13 @@ const useHandleTable = () => {
     }, [points, isGameOver, setMessage, stopTimer, setPoints]);
 
     useEffect(() => {
-        if (!isGameOver && !winCombination.length && !isDraw) {
+        if (!isGameOver && !winCombination.length && !isDraw && isGameStarted) {
             setMessage(`${TURN_PLAYER_LABEL} ${currentPlayer}`);
         }
-    }, [currentPlayer, isGameOver, winCombination.length, isDraw, setMessage]);
+    }, [currentPlayer, isGameOver, winCombination.length, isDraw, setMessage, isGameStarted]);
 
     useEffect(() => {
         if (winCombination.length > 0 && !isGameOver) {
-
             const winningPlayer = table[winCombination[0]?.[0]];
             setWinner(winningPlayer);
             handlePoints(winningPlayer);
@@ -151,7 +164,6 @@ const useHandleTable = () => {
         }
     }, [isGameOver, startNewGameWithDelay]);
 
-    // Cleanup
     useEffect(() => {
         return () => {
             if (timeoutRef.current) {
@@ -167,8 +179,10 @@ const useHandleTable = () => {
         currentPlayer,
         winner,
         isGameOver,
+        isGameStarted, // ✅ Retornar estado do jogo
         winCombination,
         handleNewGame,
+        startGame, // ✅ Retornar função para iniciar jogo
         handlerColorCell,
         timeLeft,
         handleCellClick,

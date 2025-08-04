@@ -2,6 +2,7 @@
 import Table from "@/components/table/table";
 import Menu from "@/components/menu/menu";
 import Timer from "@/components/timer/timer";
+import NewGameButton from "./new-game-button";
 import useHandleGame from "../table/hooks/useHandleGame";
 import Player from "../player/player";
 import { useColor } from "@/context/color-context";
@@ -12,7 +13,7 @@ import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore } fro
 
 const Game = () => {
     const gameState = useHandleGame();
-    const { timeLeft } = gameState;
+    const { timeLeft, isGameStarted, startGame } = gameState;
     const { fontColorX, fontColorO } = useColor();
     const { points } = usePoints();
     const { message } = useMessage();
@@ -24,6 +25,9 @@ const Game = () => {
                     <h1>Tic Tac Toe</h1>
                     <Menu />
                 </Header>
+
+                {!isGameStarted && <NewGameButton onStartGame={startGame} />}
+
                 <PlayersAndTimer>
                     <div>
                         <Player
@@ -35,7 +39,8 @@ const Game = () => {
                             currentColor={fontColorO}
                         />
                     </div>
-                    <Timer timeLeft={timeLeft} />
+                    {/* ✅ Mostrar timer apenas quando jogo foi iniciado */}
+                    {isGameStarted && <Timer timeLeft={timeLeft} />}
                 </PlayersAndTimer>
                 {message && <MessageBox>{message}</MessageBox>}
             </div>
