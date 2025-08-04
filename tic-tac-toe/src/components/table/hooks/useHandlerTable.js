@@ -11,8 +11,8 @@ const handleTable = () => {
     const [currentPlayer, setCurrentPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
-    const { handlePoints } = usePoints();
-    const { setMessage } = useMessage();
+    const { handlePoints, points, setPoints } = usePoints();
+    const { setMessage, message } = useMessage();
     const hasPlayedRef = useRef(false);
     const timeoutRef = useRef(null);
 
@@ -68,7 +68,7 @@ const handleTable = () => {
     }, [setMessage, reset]);
 
     const startNewGameWithDelay = useCallback(() => {
-        setMessage('Nova Partida em 2 segundos...');
+        setMessage(prev => prev + ' =>  Nova Partida em 2 segundos...');
         reset();
         if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
@@ -101,6 +101,28 @@ const handleTable = () => {
 
     const isDraw = table.every(cell => cell !== null) && winCombination.length === 0;
 
+    useEffect(() => {
+        if (points?.X >= 2 && !isGameOver) {
+            setWinner('X');
+            setIsGameOver(true);
+            setMessage('Jogador X venceu o campeonato!');
+            stopTimer();
+            setTimeout(() => {
+                stopTimer();
+                setPoints({ X: 0, O: 0 });
+                setTable(INITIAL_STATE);
+            }, 3000);
+        } else if (points?.O >= 2 && !isGameOver) {
+            setWinner('O');
+            setIsGameOver(true);
+            setMessage('Jogador O venceu o campeonato!');
+            stopTimer();
+            setTimeout(() => {
+                setPoints({ X: 0, O: 0 });
+                setTable(INITIAL_STATE);
+            }, 3000);
+        }
+    }, [points, isGameOver, setMessage, stopTimer, setPoints]);
 
     useEffect(() => {
         if (!isGameOver && !winCombination.length && !isDraw) {
