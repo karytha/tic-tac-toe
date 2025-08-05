@@ -9,7 +9,7 @@ import { useColor } from "@/context/color-context";
 import Score from "../score/score";
 import { usePoints } from "@/context/points-context";
 import { useMessage } from "@/context/message-context";
-import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore } from "./game-styles";
+import { GameContainer, Header, PlayersAndTimer, MessageBox, TableAndScore, Container } from "./game-styles";
 import { GAME_TITLE, X_LABEL, O_LABEL } from "@/constants/constantes";
 
 const Game = () => {
@@ -21,7 +21,7 @@ const Game = () => {
 
     return (
         <GameContainer>
-            <div>
+            <Container>
                 <Header>
                     <h1>{GAME_TITLE}</h1>
                     <Menu />
@@ -40,11 +40,10 @@ const Game = () => {
                             currentColor={fontColorO}
                         />
                     </div>
-                    {/* ✅ Mostrar timer apenas quando jogo foi iniciado */}
                     {isGameStarted && <Timer timeLeft={timeLeft} />}
                 </PlayersAndTimer>
                 {message && <MessageBox>{message}</MessageBox>}
-            </div>
+            </Container>
 
             <TableAndScore>
                 <Table gameState={gameState} />
