@@ -56,35 +56,33 @@ tic-tac-toe/
 │   │   └── page.module.css        # CSS modules
 │   │
 │   ├── 📁 components/             # Componentes React
-│   │   ├── �� game/              # Componente principal do jogo
-│   │   ├── �� table/             # Tabuleiro do jogo
-│   │   │   ├── �� hooks/         # Hooks customizados
+│   │   ├── 📁 game/               # Componente principal do jogo
+│   │   ├── 📁 table/              # Tabuleiro do jogo
+│   │   │   ├── 📁 hooks/          # Hooks customizados
 │   │   │   │   ├── useHandleGame.js
 │   │   │   │   └── useTurnPlayerTime.js
 │   │   │   ├── table.jsx
 │   │   │   └── table-styles.jsx
-│   │   ├── �� player/            # Componente do jogador
-│   │   ├── �� timer/             # Componente do timer
-│   │   ├── �� score/             # Componente da pontuação
-│   │   ├── �� menu/              # Menu de configurações
-│   │   ├── �� color-selector/    # Seletor de cores
-│   │   └── �� table-item/        # Item individual do tabuleiro
+│   │   ├── 📁 player/             # Componente do jogador
+│   │   ├── 📁 timer/              # Componente do timer
+│   │   ├── 📁 score/              # Componente da pontuação
+│   │   ├── 📁 menu/               # Menu de configurações
+│   │   ├── 📁 color-selector/     # Seletor de cores
+│   │   └── 📁 table-item/         # Item individual do tabuleiro
 │   │
-│   ├── 📁 context/               # Context API (Gerenciamento de Estado)
-│   │   ├── color-context.jsx     # Contexto de cores
-│   │   ├── points-context.jsx    # Contexto de pontuação
-│   │   ├── message-context.jsx   # Contexto de mensagens
-│   │   └── timer-context.jsx     # Contexto do timer
+│   ├── 📁 context/                # Context API (Gerenciamento de Estado)
+│   │   ├── color-context.jsx      # Contexto de cores
+│   │   ├── points-context.jsx     # Contexto de pontuação
+│   │   ├── message-context.jsx    # Contexto de mensagens
+│   │   └── timer-context.jsx      # Contexto do timer
 │   │
-│   ├── 📁 constants/             # Constantes do projeto
-│   │   └── constantes.js         # Labels e constantes
+│   ├── 📁 constants/              # Constantes do projeto
+│   │   └── constantes.js          # Labels e constantes
 │   │
-│   └── 📁 assets/                # Recursos estáticos
-│
-├── 📁 public/                    # Arquivos públicos
-├── package.json                  # Dependências
-├── next.config.mjs              # Configuração Next.js
-└── jsconfig.json                # Configuração JavaScript
+├── 📁 public/                     # Arquivos públicos
+├── package.json                   # Dependências
+├── next.config.mjs                # Configuração Next.js
+└── jsconfig.json                  # Configuração JavaScript
 
 
 *Instruções de uso
