@@ -1,4 +1,4 @@
-export const BACKGROUND_TABLE_COLOR_LABEL = 'Cor da tabela';
+export const BACKGROUND_TABLE_COLOR_LABEL = 'Cor do tabuleiro';
 export const WINNER_COLOR_LABEL = 'Cor do vencedor';
 export const LOSER_COLOR_LABEL = 'Cor do perdedor';
 export const FONT_COLOR_LABEL = 'Cor da fonte';

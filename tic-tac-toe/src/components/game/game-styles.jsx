@@ -85,7 +85,7 @@ export const MessageBox = styled.div`
   background-color: #f0f0f0;
   border-radius: 5px;
   font-weight: bold;
-  color: red;
+  color: black;
   font-size: 1rem;
   
   @media (max-width: 768px) {
@@ -124,8 +124,10 @@ export const TableAndScore = styled.div`
 `;
 
 export const Overlay = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
