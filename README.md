@@ -1,4 +1,4 @@
-🎮 Tic Tac Toe Game
+Tic Tac Toe Game
 
 Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
