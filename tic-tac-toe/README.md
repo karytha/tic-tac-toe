@@ -1,8 +1,8 @@
-🎮 Tic Tac Toe Game
+Tic Tac Toe Game
 
 Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
-* Como rodar o projeto
+-- Como rodar o projeto
 
 * Pré-requisitos:
 - Node.js (versão 16 ou superior)
@@ -46,7 +46,7 @@ Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 - Reinício automático após 2 segundos
 
 * Estrutura de pastas
-
+```
 tic-tac-toe/
 ├── 📁 src/
 │   ├── 📁 app/                    # Next.js App Router
@@ -83,7 +83,7 @@ tic-tac-toe/
 ├── package.json                   # Dependências
 ├── next.config.mjs                # Configuração Next.js
 └── jsconfig.json                  # Configuração JavaScript
-
+```
 
 * Instruções de uso
 
@@ -122,3 +122,4 @@ Gerenciadas pelo ColorContext:
 - Cor das células vencedoras
 - Cor da fonte dos textos
 
+****
