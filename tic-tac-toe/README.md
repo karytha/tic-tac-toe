@@ -4,11 +4,11 @@ Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
 * Como rodar o projeto
 
-Pré-requisitos:
+* Pré-requisitos:
 - Node.js (versão 16 ou superior)
 - npm ou yarn
 
-Instalação:
+* Instalação:
 
 1. Clone o repositório:
    git clone <url-do-repositorio>
@@ -25,7 +25,7 @@ Instalação:
 
 * Funcionalidades
 
-Principais recursos:
+* Principais recursos:
 - Tabuleiro 3x3 com jogadores X e O
 - Timer de 5 segundos por jogada
 - Jogadas automáticas ao esgotar o tempo
@@ -33,13 +33,13 @@ Principais recursos:
 - Interface com opções de personalização de cores
 - Reinício automático após o término da partida
 
-Personalização:
+* Personalização:
 - Cor de fundo do tabuleiro
 - Cores dos jogadores (X e O)
 - Cor de destaque para células vencedoras
 - Cor da fonte
 
-Tempo e jogadas:
+* Tempo e jogadas:
 - Tempo limite de 5 segundos por jogada
 - Jogadas automáticas ao esgotar o tempo
 - Alternância automática entre jogadores
@@ -85,7 +85,7 @@ tic-tac-toe/
 └── jsconfig.json                  # Configuração JavaScript
 
 
-*Instruções de uso
+* Instruções de uso
 
 Regras:
 1. Alinhar 3 símbolos (X ou O) em linha, coluna ou diagonal
@@ -94,6 +94,7 @@ Regras:
 4. O primeiro a alinhar 3 símbolos vence
 
 * Controles:
+- Clique no botão para iniciar o jogo
 - Clique em uma célula vazia para jogar
 - O temporizador exibe o tempo restante
 - O menu permite personalizar as cores
@@ -113,7 +114,7 @@ Regras:
 - Context API – Gerenciamento de estado global
 - Hooks personalizados – Lógica reutilizável
 
-*Cores
+* Cores
 Gerenciadas pelo ColorContext:
 - Cor de fundo do tabuleiro
 - Cor do jogador X
