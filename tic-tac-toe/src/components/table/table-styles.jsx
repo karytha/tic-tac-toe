@@ -28,7 +28,7 @@ export const TableContainer = styled.div`
 `;
 
 export const TableItem = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['background', 'color'].includes(prop)  // Evita que o styled-components faça o spread de propriedades que não são suportadas 
+  shouldForwardProp: (prop) => !['background', 'color'].includes(prop)
 })`
   width: 100%;
   height: 100%;
@@ -57,12 +57,7 @@ export const TableItem = styled.div.withConfig({
   }
 
   &:hover {
-    background-color: transparent;
-    transform: scale(1.02);
+    transform: scale(1.10);
   }
   
-  &:active {
-    background-color:rgba(192, 192, 192, 0.19);
-    transform: scale(0.98);
-  }
 `;
