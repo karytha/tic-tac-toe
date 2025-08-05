@@ -2,7 +2,7 @@
 
 Jogo da velha interativo desenvolvido com Next.js, React e Styled Components.
 
-* Como rodar o projeto
+-- Como rodar o projeto
 
 * Pré-requisitos:
 - Node.js (versão 16 ou superior)
